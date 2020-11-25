@@ -1,0 +1,46 @@
+<div class="container">
+    <div style="text-align: center; width: 100%; margin: 30px 0px;">
+        <a style="margin-top: 20px;" href="/">
+            <img src="/assets/hydb-purple-logo.png" style="width: 100px;" />
+        </a>
+    </div>
+    <div class="login-registration-form">
+        <h3 style="text-align: center; margin-bottom: 20px;">Sign in to your account</h3>
+        <mat-card>
+            <mat-card-content style="margin-bottom: 0;">
+                <div class="alert alert-danger" role="alert" *ngIf="hasError">
+                    {{ errorMessage }}
+                </div>
+                <div [formGroup]="loginForm">
+                    <mat-form-field appearance="outline" style="width:100% !important;">
+                        <mat-label>Username</mat-label>
+                        <input type="email" matInput formControlName="userName">
+                    </mat-form-field>
+        
+                    <mat-form-field appearance="outline" style="width:100% !important;">
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput formControlName="password">
+                    </mat-form-field>
+                </div>          
+            </mat-card-content>
+    
+            <mat-card-actions>
+                <mat-spinner style="margin: 0 auto;" [diameter]="30" *ngIf="!showButton"></mat-spinner>
+                <div class="d-flex justify-content-center" *ngIf="showButton">
+                    <button mat-raised-button
+                            [disabled]="loginForm.invalid"
+                            color="primary" 
+                            (click)="signIn()">
+                        Sign in
+                    </button>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <p>New to hydb? <a href="https://www.hydb.xyz/#/join">Create an account</a></p>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+        <p style="margin-top: 20px; color: grey; text-align: center;">
+            <a style="text-decoration: none;" href="/">hydb</a> © 2019-2020
+        </p>
+    </div>
+</div>

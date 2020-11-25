@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-purple">
+    <a class="navbar-brand" href="/" style="margin-right: 20px;">
+        <img src="/assets/hydb-white-logo.png" style="width: 60px;"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+            <a class="nav-link" routerLink="/builder/apps">
+                <i class="fas fa-plug fa-fw" aria-hidden="true"></i>&nbsp;Services
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" routerLink="/datamodel">
+                <i class="fas fa-database fa-fw" aria-hidden="true"></i>&nbsp;Data Models
+            </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav my-2 my-lg-0">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user fa-fw" aria-hidden="true"></i>&nbsp;{{ userName }}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cog fa-fw" aria-hidden="true"></i>&nbsp;Settings
+                </a>
+                <a class="dropdown-item" href="#" (click)="logout()">
+                    <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>&nbsp;Logout
+                </a>
+            </div>
+          </li>
+      </ul>
+    </div>
+</nav>
