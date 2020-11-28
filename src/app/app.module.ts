@@ -21,7 +21,8 @@ import { MatButtonModule,
   MatListModule,
   MatMenuModule,
   MatProgressSpinnerModule,
-  MatPaginatorModule} from '@angular/material';
+  MatPaginatorModule,
+  MatTabsModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -30,6 +31,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyaccountComponent } from './components/myaccount/myaccount.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DbServicesComponent } from './components/db-services/db-services.component';
+import { DataModelsComponent } from './components/data-models/data-models.component';
+import { DataModelCreationWizardComponent } from './components/data-models/data-model-creation-wizard/data-model-creation-wizard.component';
+import { PropertyListComponent } from './components/data-models/property-list/property-list.component';
+import { PropertyWizardComponent } from './components/data-models/property-list/property-wizard/property-wizard.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,11 @@ import { DbServicesComponent } from './components/db-services/db-services.compon
     LoginComponent,
     MyaccountComponent,
     NavbarComponent,
-    DbServicesComponent
+    DbServicesComponent,
+    DataModelsComponent,
+    DataModelCreationWizardComponent,
+    PropertyListComponent,
+    PropertyWizardComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +74,13 @@ import { DbServicesComponent } from './components/db-services/db-services.compon
     MatMenuModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
+    MatIconModule,
     ReactiveFormsModule,
+  ],
+  entryComponents: [
+    DataModelCreationWizardComponent,
+    PropertyWizardComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

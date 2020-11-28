@@ -1,0 +1,24 @@
+<button class="btn btn-success" style="margin-top: 15px;" (click)="openPropertyWizard()">
+    <i class="fas fa-plus fa-fw"></i>&nbsp;Add property
+</button>
+<div class="table-responsive">
+    <table class="table table-bordered" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let property of dataModel.properties">
+            <td>{{ property.name }}</td>
+            <td>{{ property.type }}</td>
+            <td class="button-row">
+                <button mat-raised-button color="primary">Edit</button>
+                <button mat-raised-button color="warn">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>

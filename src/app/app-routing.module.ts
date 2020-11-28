@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DataModelsComponent } from './components/data-models/data-models.component';
 import { DbServicesComponent } from './components/db-services/db-services.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyaccountComponent } from './components/myaccount/myaccount.component';
@@ -21,6 +22,17 @@ const routes: Routes = [
   {
     path: 'services',
     component: DbServicesComponent,
+    data: {
+      title: 'Services'
+    },
+    canActivate: [ AuthGuard ]
+  },
+  {
+    path: 'datamodels',
+    component: DataModelsComponent,
+    data: {
+      title: 'Data Models'
+    },
     canActivate: [ AuthGuard ]
   },
   {

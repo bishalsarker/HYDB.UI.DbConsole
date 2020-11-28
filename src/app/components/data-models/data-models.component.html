@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        <h4 class="header">Data Models</h4>
+    </div>
+    <diV class="col-md-6 col-sm-12">
+        <div class="input-group">
+            <select class="custom-select" [(ngModel)]="selectedDataModelId">
+                <option value="" *ngIf="hasNoDataModels">Choose...</option>
+                <option 
+                    *ngFor="let dataModel of dataModels" 
+                    [value]="dataModel.id">
+                  {{ dataModel.name }}
+                </option> 
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-success" (click)="openDataModelCreationWizard()">
+                    <i class="fas fa-plus fa-fw"></i>&nbsp;Add new model
+                </button>
+            </div>
+        </div>
+    </diV>
+</div>
+
+<div class="row" *ngIf="selectedDataModel" style="margin-top: 30px;">
+    <div class="col-12">
+        <h5 class="header">{{ selectedDataModel.name }}</h5>
+    </div>
+    <div class="col-12" style="margin-top: 15px;">
+        <mat-tab-group mat-align-tabs="start">
+            <mat-tab label="Properties">
+                <hydb-property-list [dataModel]="selectedDataModel" ></hydb-property-list>
+            </mat-tab>
+            <mat-tab label="Settings">Settings</mat-tab>
+        </mat-tab-group>  
+    </div>
+</div>
+
+<div class="row" style="margin-top: 30px;">
+    <div class="col-12" *ngIf="hasNoDataModels" style="text-align: center; margin-top: 30px;">
+        <p>Seems like you have any data models created currently</p>
+        <p>Start creating data models by clicking on the "Add new model" button</p>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>New Data Model</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline" style="width:100% !important;">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.name"  cdkFocusInitial>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="margin-bottom: 15px;">
+  <button mat-raised-button color="warn" (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onCreateClick()">Create</button>
+</div>
