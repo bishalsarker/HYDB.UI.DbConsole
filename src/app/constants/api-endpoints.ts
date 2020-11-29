@@ -12,5 +12,6 @@ export class ApiEndpoints {
     public static readonly DATA_MODELS_GET_ALL_OR_SINGLE: string = `${ApiEndpoints.DATA_MODELS}/get`;
     public static readonly DATA_MODEL_PROPERTIES: string = `${ApiEndpoints.ROOT}/datamodel/property`;
     public static readonly DATA_MODEL_PROPERTIES_ADD_NEW: string = `${ApiEndpoints.DATA_MODEL_PROPERTIES}/addnew`;
+    public static readonly DATA_MODEL_PROPERTIES_REMOVE: string = `${ApiEndpoints.DATA_MODEL_PROPERTIES}/delete`;
     
 }

@@ -1,7 +1,10 @@
 <button class="btn btn-success" style="margin-top: 15px;" (click)="openPropertyWizard()">
     <i class="fas fa-plus fa-fw"></i>&nbsp;Add property
 </button>
-<div class="table-responsive">
+<div *ngIf="!hasProperties" style="text-align: center; margin-top: 50px;">
+  <p>No properties added yet</p>
+</div>
+<div class="table-responsive" *ngIf="hasProperties">
     <table class="table table-bordered" style="margin-top: 20px;">
         <thead>
           <tr>
@@ -16,7 +19,7 @@
             <td>{{ property.type }}</td>
             <td class="button-row">
                 <button mat-raised-button color="primary">Edit</button>
-                <button mat-raised-button color="warn">Delete</button>
+                <button mat-raised-button color="warn" (click)="deleteProperty(property)">Delete</button>
             </td>
           </tr>
         </tbody>

@@ -6,6 +6,7 @@ import { IDataModel, IDataModelProperty } from 'src/app/interfaces/IDataModel';
 import { HttpheadersService } from 'src/app/services/httpheaders.service';
 import { PropertyWizardComponent } from './property-wizard/property-wizard.component';
 import * as _ from 'lodash';
+import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'hydb-property-list',
@@ -21,6 +22,12 @@ export class PropertyListComponent implements OnInit {
               private httpHeaderService: HttpheadersService) { }
 
   ngOnInit() {
+  }
+
+  public get hasProperties(): boolean {
+    if(this.dataModel) {
+      return this.dataModel.properties.length > 0;
+    }
   }
 
   public openPropertyWizard(): void {
@@ -53,6 +60,31 @@ export class PropertyListComponent implements OnInit {
           this.dataModel.properties.push(savedProperty);
         }
       });
+  }
+
+  public deleteProperty(property: IDataModelProperty): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '500px',
+      data: { 
+        message: 'By removing this property it will also remove all the saved data for this property. Are you sure you want to delete this property?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.httpClient
+          .get<any>(ApiEndpoints.DATA_MODEL_PROPERTIES_REMOVE, {
+            params: { propId: property.id },
+            headers: new HttpHeaders(this.httpHeaderService.getHeaders(false))
+          })
+          .subscribe((response: any) => {
+            this.snackBar.open(response.message, 'Dismiss', { duration: 3000 });
+            this.dataModel.properties = _.remove(this.dataModel.properties, (o) => {
+              return o.id !== property.id;
+            })
+          });
+      }
+    });
   }
 
 }
