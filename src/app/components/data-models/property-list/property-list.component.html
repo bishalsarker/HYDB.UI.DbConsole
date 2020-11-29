@@ -18,8 +18,12 @@
             <td>{{ property.name }}</td>
             <td>{{ property.type }}</td>
             <td class="button-row">
-                <button mat-raised-button color="primary">Edit</button>
-                <button mat-raised-button color="warn" (click)="deleteProperty(property)">Delete</button>
+                <button mat-raised-button color="primary">
+                  <i class="fas fa-edit fa-fw" aria-hidden="true"></i>&nbsp;Edit
+                </button>
+                <button mat-raised-button color="warn" (click)="deleteProperty(property)">
+                  <i class="fas fa-trash fa-fw" aria-hidden="true"></i>&nbsp;Delete
+                </button>
             </td>
           </tr>
         </tbody>
