@@ -2,21 +2,36 @@
 <h1 mat-dialog-title *ngIf="!data.isNew">Edit Property</h1> -->
 <h1 mat-dialog-title>New Property</h1>
 <div mat-dialog-content style="padding-bottom: 20px;">
-  <mat-form-field style="width:100% !important; margin-bottom: 25px;">
+
+  <mat-form-field appearance="outline" style="width:100% !important; margin-bottom: 10px;">
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="data.name" placeholder="e.g. phone_number">
-    <mat-hint>Spaces and special characters are not allowed</mat-hint>
+    <input matInput [formControl]="propertyName" placeholder="e.g. phone_number">
   </mat-form-field>
-  <mat-form-field style="width:100% !important;">
+  <div *ngIf="propertyName.invalid && (propertyName.dirty || propertyName.touched)" style="color: red; margin-bottom: 15px;">
+    <div *ngIf="propertyName.errors.required">
+      Name is required.
+    </div>
+    <div *ngIf="propertyName.errors.pattern">
+      Only alphanumeric characters
+    </div>
+  </div>
+
+  <mat-form-field appearance="outline" style="width:100% !important; margin-bottom: 10px;">
     <mat-label>Data Type</mat-label>
-    <mat-select [(ngModel)]="data.type">
+    <mat-select [formControl]="propertyType">
         <mat-option value="text">Text</mat-option>
         <mat-option value="number">Number</mat-option>
     </mat-select>
   </mat-form-field>
+  <div *ngIf="propertyType.invalid && (propertyType.dirty || propertyType.touched)" style="color: red; margin-bottom: 15px;">
+    <div *ngIf="propertyType.errors.required">
+      Type is required.
+    </div>
+  </div>
+
 </div>
 <div mat-dialog-actions style="margin-bottom: 15px;">
-  <button mat-raised-button color="warn" (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button color="warn" (click)="dialogRef.close()">Cancel</button>
   <button mat-raised-button color="primary" (click)="onCreateClick()" cdkFocusInitial>Create</button>
   <!-- <button mat-raised-button color="primary" *ngIf="data.isNew" [mat-dialog-close]="true" cdkFocusInitial>Create</button>
   <button mat-raised-button color="primary" *ngIf="!data.isNew" [mat-dialog-close]="true" cdkFocusInitial>Update</button> -->

@@ -47,13 +47,12 @@ export class DataModelsComponent implements OnInit {
         headers: new HttpHeaders(this.httpHeaderService.getHeaders(false))
       })
       .subscribe((response: any) => {
+        this.snackBar.open(response.message, 'Dismiss', { duration: 3000 });
         if(response.isSuccess) {
-          this.snackBar.open(response.message, 'dismiss', { duration: 3000 });
           const savedDataModel: IDataModel = _.cloneDeep(response.data);
           this.dataModels.push(savedDataModel);
           this.selectedDataModelId = savedDataModel.id;
         }
-        
       });
   }
 

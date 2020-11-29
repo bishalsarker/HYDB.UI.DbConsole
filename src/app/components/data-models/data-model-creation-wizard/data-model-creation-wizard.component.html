@@ -1,11 +1,19 @@
 <h1 mat-dialog-title>New Data Model</h1>
 <div mat-dialog-content>
-  <mat-form-field appearance="outline" style="width:100% !important;">
+  <mat-form-field appearance="outline" style="width:100% !important; margin-bottom: 10px;">
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="data.name"  cdkFocusInitial>
+    <input matInput [formControl]="dataModelName" cdkFocusInitial>
   </mat-form-field>
+  <div *ngIf="dataModelName.invalid && (dataModelName.dirty || dataModelName.touched)" style="color: red; margin-bottom: 15px;">
+    <div *ngIf="dataModelName.errors.required">
+      Name is required.
+    </div>
+    <div *ngIf="dataModelName.errors.pattern">
+      Only alphanumeric characters
+    </div>
+  </div>
 </div>
 <div mat-dialog-actions style="margin-bottom: 15px;">
   <button mat-raised-button color="warn" (click)="onCancelClick()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onCreateClick()">Create</button>
+  <button mat-raised-button color="primary" (click)="onCreateClick()" [disabled]="dataModelName.invalid">Create</button>
 </div>

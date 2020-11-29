@@ -47,8 +47,8 @@ export class PropertyListComponent implements OnInit {
         headers: new HttpHeaders(this.httpHeaderService.getHeaders(false))
       })
       .subscribe((response: any) => {
+        this.snackBar.open(response.message, 'Dismiss', { duration: 3000 });
         if(response.isSuccess) {
-          this.snackBar.open(response.message, 'dismiss', { duration: 3000 });
           const savedProperty: IDataModelProperty = _.cloneDeep(response.data);
           this.dataModel.properties.push(savedProperty);
         }
