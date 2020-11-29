@@ -13,6 +13,7 @@ import { HttpheadersService } from 'src/app/services/httpheaders.service';
   styleUrls: ['./data-models.component.scss']
 })
 export class DataModelsComponent implements OnInit {
+  public selectedTab: number = 0;
   public dataModels: IDataModel[] = [];
   public selectedDataModelId: string = '';
 
@@ -56,7 +57,7 @@ export class DataModelsComponent implements OnInit {
       });
   }
 
-  private loadAllDataModels(): void {
+  public loadAllDataModels(): void {
     this.httpClient
       .get<IDataModel[]>(ApiEndpoints.DATA_MODELS_GET_ALL_OR_SINGLE, {
         headers: new HttpHeaders(this.httpHeaderService.getHeaders(false))
@@ -64,6 +65,7 @@ export class DataModelsComponent implements OnInit {
       .subscribe(response => {
         this.dataModels = _.cloneDeep(response);
         if (this.dataModels.length > 0) {
+          this.selectedTab = 0;
           this.selectedDataModelId = this.dataModels[0].id;
         }
       });
@@ -86,5 +88,4 @@ export class DataModelsComponent implements OnInit {
   public get hasNoDataModels(): boolean {
     return this.dataModels.length < 1;
   }
-
 }

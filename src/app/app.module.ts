@@ -36,6 +36,7 @@ import { DataModelCreationWizardComponent } from './components/data-models/data-
 import { PropertyListComponent } from './components/data-models/property-list/property-list.component';
 import { PropertyWizardComponent } from './components/data-models/property-list/property-wizard/property-wizard.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { DatamodelSettingsComponent } from './components/data-models/datamodel-settings/datamodel-settings.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     DataModelCreationWizardComponent,
     PropertyListComponent,
     PropertyWizardComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    DatamodelSettingsComponent
   ],
   imports: [
     BrowserModule,

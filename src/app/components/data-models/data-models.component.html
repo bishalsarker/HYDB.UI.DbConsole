@@ -26,11 +26,13 @@
         <h5 class="header">{{ selectedDataModel.name }}</h5>
     </div>
     <div class="col-12" style="margin-top: 15px;">
-        <mat-tab-group mat-align-tabs="start">
+        <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedTab">
             <mat-tab label="Properties">
-                <hydb-property-list [dataModel]="selectedDataModel" ></hydb-property-list>
+                <hydb-property-list [dataModel]="selectedDataModel"></hydb-property-list>
             </mat-tab>
-            <mat-tab label="Settings">Settings</mat-tab>
+            <mat-tab label="Settings">
+                <hydb-datamodel-settings [dataModel]="selectedDataModel" (refresh)="loadAllDataModels()"></hydb-datamodel-settings>
+            </mat-tab>
         </mat-tab-group>  
     </div>
 </div>
