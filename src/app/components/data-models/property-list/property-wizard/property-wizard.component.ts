@@ -11,7 +11,8 @@ import { PropertyListComponent } from '../property-list.component';
   encapsulation: ViewEncapsulation.None
 })
 export class PropertyWizardComponent implements OnInit {
-
+  public dialogTitle: string = 'New Property';
+  public createActionBtnTxt: string = 'Create';
   public propertyName: FormControl = new FormControl('', [
     Validators.required,
     Validators.pattern('^[a-zA-Z_]*$')
@@ -20,15 +21,22 @@ export class PropertyWizardComponent implements OnInit {
   public propertyType: FormControl = new FormControl('', Validators.required);
 
   constructor(public dialogRef: MatDialogRef<PropertyListComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IDataModelProperty) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
 
   ngOnInit() {
+    console.log(this.data);
+    if(!this.data.isNew) {
+      this.dialogTitle = 'Update Property';
+      this.createActionBtnTxt = 'Update';
+      this.propertyName.setValue(this.data.propertyModel.name);
+      this.propertyType.setValue(this.data.propertyModel.type);
+    }
   }
 
   public onCreateClick(): void {
-    this.data.name = this.propertyName.value;
-    this.data.type = this.propertyType.value;
+    this.data.propertyModel.name = this.propertyName.value;
+    this.data.propertyModel.type = this.propertyType.value;
     this.dialogRef.close(this.data);
   }
 

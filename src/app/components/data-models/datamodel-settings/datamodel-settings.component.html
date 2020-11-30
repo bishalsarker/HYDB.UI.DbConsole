@@ -1,3 +1,10 @@
-<button class="btn btn-danger" style="margin-top: 15px;" (click)="openDeleteConfirmationDialog()">
-    <i class="fas fa-trash fa-fw"></i>&nbsp;Delete this data model
-</button>
+<div style="margin-top: 15px;">
+    <div class="button-row">
+        <button class="btn btn-primary" (click)="openPropertyWizard(false, property)">
+            <i class="fas fa-edit fa-fw" aria-hidden="true"></i>&nbsp;Rename
+          </button>
+        <button class="btn btn-danger" (click)="openDeleteConfirmationDialog()">
+            <i class="fas fa-trash fa-fw"></i>&nbsp;Delete this data model
+        </button>
+    </div>
+</div>

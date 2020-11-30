@@ -1,4 +1,4 @@
-<button class="btn btn-success" style="margin-top: 15px;" (click)="openPropertyWizard()">
+<button class="btn btn-success" style="margin-top: 15px;" (click)="openPropertyWizard(true)">
     <i class="fas fa-plus fa-fw"></i>&nbsp;Add property
 </button>
 <div *ngIf="!hasProperties" style="text-align: center; margin-top: 50px;">
@@ -18,7 +18,7 @@
             <td>{{ property.name }}</td>
             <td>{{ property.type }}</td>
             <td class="button-row">
-                <button mat-raised-button color="primary">
+                <button mat-raised-button color="primary" (click)="openPropertyWizard(false, property)">
                   <i class="fas fa-edit fa-fw" aria-hidden="true"></i>&nbsp;Edit
                 </button>
                 <button mat-raised-button color="warn" (click)="deleteProperty(property)">

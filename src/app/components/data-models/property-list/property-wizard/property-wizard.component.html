@@ -1,6 +1,4 @@
-<!-- <h1 mat-dialog-title *ngIf="data.isNew">New Property</h1>
-<h1 mat-dialog-title *ngIf="!data.isNew">Edit Property</h1> -->
-<h1 mat-dialog-title>New Property</h1>
+<h1 mat-dialog-title>{{ dialogTitle }}</h1>
 <div mat-dialog-content style="padding-bottom: 20px;">
 
   <mat-form-field appearance="outline" style="width:100% !important; margin-bottom: 10px;">
@@ -32,7 +30,5 @@
 </div>
 <div mat-dialog-actions style="margin-bottom: 15px;">
   <button mat-raised-button color="warn" (click)="dialogRef.close()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onCreateClick()" cdkFocusInitial>Create</button>
-  <!-- <button mat-raised-button color="primary" *ngIf="data.isNew" [mat-dialog-close]="true" cdkFocusInitial>Create</button>
-  <button mat-raised-button color="primary" *ngIf="!data.isNew" [mat-dialog-close]="true" cdkFocusInitial>Update</button> -->
+  <button mat-raised-button color="primary" (click)="onCreateClick()" cdkFocusInitial>{{ createActionBtnTxt }}</button>
 </div>

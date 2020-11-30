@@ -30,36 +30,76 @@ export class PropertyListComponent implements OnInit {
     }
   }
 
-  public openPropertyWizard(): void {
+  private getAddOrUpdateApiUrl(create: boolean): string {
+    let url: string = ApiEndpoints.DATA_MODEL_PROPERTIES_ADD_NEW;
+
+    if(!create) {
+      url = ApiEndpoints.DATA_MODEL_PROPERTIES_UPDATE;
+    }
+
+    return url
+  }
+
+  public openPropertyWizard(create: boolean, propertyModel?: IDataModelProperty): void {
+    const model: IDataModelProperty = this.getPropertyModel(create, propertyModel);
     const dialogRef = this.dialog.open(PropertyWizardComponent, {
       width: '500px',
       data: { 
-        id: '', 
-        name: '',
-        type: '',
-        dataModelId: this.dataModel.id
+        isNew: create,
+        propertyModel: model
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.addProperty(result);
+        this.createOrUpdateProperty(create, result.propertyModel);
       }
     });
   }
 
-  public addProperty(newProperty: IDataModelProperty): void {
+  private getPropertyModel(create: boolean, propertyModel: IDataModelProperty) {
+    const model: IDataModelProperty = {
+      id: '',
+      name: '',
+      type: '',
+      dataModelId: this.dataModel.id
+    };
+
+    if (!create && propertyModel) {
+      model.id = propertyModel.id;
+      model.name = propertyModel.name;
+      model.type = propertyModel.type;
+    }
+    
+    return model;
+  }
+
+  public createOrUpdateProperty(create: boolean, newProperty: IDataModelProperty): void {
     this.httpClient
-      .post<IDataModelProperty>(ApiEndpoints.DATA_MODEL_PROPERTIES_ADD_NEW, newProperty, {
+      .post<IDataModelProperty>(this.getAddOrUpdateApiUrl(create), newProperty, {
         headers: new HttpHeaders(this.httpHeaderService.getHeaders(false))
       })
       .subscribe((response: any) => {
         this.snackBar.open(response.message, 'Dismiss', { duration: 3000 });
         if(response.isSuccess) {
-          const savedProperty: IDataModelProperty = _.cloneDeep(response.data);
-          this.dataModel.properties.push(savedProperty);
+          const savedProperty: IDataModelProperty = _.cloneDeep(response.data);        
+          this.addOrUpdatePropertyList(create, savedProperty);
         }
       });
+  }
+
+  private addOrUpdatePropertyList(create: boolean, savedProperty: IDataModelProperty) {
+    if (!create) {
+      this.dataModel.properties.forEach((prop) => {
+        if (savedProperty.id === prop.id) {
+          prop.name = savedProperty.name;
+          prop.type = savedProperty.type;
+          return;
+        }
+      });
+    } else {
+      this.dataModel.properties.push(savedProperty);
+    }
   }
 
   public deleteProperty(property: IDataModelProperty): void {
