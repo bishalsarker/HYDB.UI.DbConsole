@@ -27,35 +27,74 @@ export class DataModelsComponent implements OnInit {
     this.loadAllDataModels();
   }
 
-  public openDataModelCreationWizard(): void {
+  public openDataModelCreationWizard(create: boolean, dataModel?: IDataModel): void {
+    const newDataModel: IDataModel = this.getDataModel(create, dataModel);
     const dialogRef = this.dialog.open(DataModelCreationWizardComponent, {
       width: '500px',
       data: { 
-        id: '', 
-        name: '' 
+        isNew: create,
+        dataModel: newDataModel 
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.saveDataModel(result);
+        this.saveOrUpdateDataModel(create, result.dataModel);
       }
     });
   }
 
-  private saveDataModel(newDataModel: IDataModel): void {
+  private getAddOrUpdateApiUrl(create: boolean): string {
+    let url: string = ApiEndpoints.DATA_MODELS_ADD_NEW;
+
+    if(!create) {
+      url = ApiEndpoints.DATA_MODELS_UPDATE;
+    }
+
+    return url;
+  }
+
+  private getDataModel(create: boolean, dataModel: IDataModel) {
+    const model: IDataModel = {
+      id: '',
+      name: '',
+      properties: []
+    };
+
+    if (!create && dataModel) {
+      model.id = dataModel.id;
+      model.name = dataModel.name;
+    }
+    
+    return model;
+  }
+
+  private saveOrUpdateDataModel(create: boolean, newDataModel: IDataModel): void {
     this.httpClient
-      .post<IDataModel>(ApiEndpoints.DATA_MODELS_ADD_NEW, newDataModel, {
+      .post<IDataModel>(this.getAddOrUpdateApiUrl(create), newDataModel, {
         headers: new HttpHeaders(this.httpHeaderService.getHeaders(false))
       })
       .subscribe((response: any) => {
         this.snackBar.open(response.message, 'Dismiss', { duration: 3000 });
         if(response.isSuccess) {
           const savedDataModel: IDataModel = _.cloneDeep(response.data);
-          this.dataModels.push(savedDataModel);
+          this. addOrUpdateDataModel(create, savedDataModel);
           this.selectedDataModelId = savedDataModel.id;
         }
       });
+  }
+
+  private addOrUpdateDataModel(create: boolean, savedDataModel: IDataModel) {
+    if (!create) {
+      this.dataModels.forEach((dm) => {
+        if (savedDataModel.id === dm.id) {
+          dm.name = savedDataModel.name;
+          return;
+        }
+      });
+    } else {
+      this.dataModels.push(savedDataModel);
+    }
   }
 
   public loadAllDataModels(): void {

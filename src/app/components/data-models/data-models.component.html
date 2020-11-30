@@ -15,7 +15,7 @@
                 </option> 
             </select>
             <div class="input-group-append">
-                <button class="btn btn-success" (click)="openDataModelCreationWizard()">
+                <button class="btn btn-success" (click)="openDataModelCreationWizard(true)">
                     <i class="fas fa-plus fa-fw"></i>&nbsp;Add new model
                 </button>
             </div>
@@ -34,7 +34,11 @@
                     <hydb-property-list [dataModel]="selectedDataModel"></hydb-property-list>
                 </mat-tab>
                 <mat-tab label="Settings">
-                    <hydb-datamodel-settings [dataModel]="selectedDataModel" (refresh)="loadAllDataModels()"></hydb-datamodel-settings>
+                    <hydb-datamodel-settings 
+                        [dataModel]="selectedDataModel" 
+                        (refresh)="loadAllDataModels()"
+                        (rename)="openDataModelCreationWizard(false, selectedDataModel)">
+                    </hydb-datamodel-settings>
                 </mat-tab>
             </mat-tab-group>  
         </div>

@@ -15,6 +15,7 @@ import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmat
 export class DatamodelSettingsComponent implements OnInit {
   @Input() dataModel: IDataModel;
   @Output() refresh: EventEmitter<void> = new EventEmitter<void>();
+  @Output() rename: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private httpClient: HttpClient, 
@@ -48,6 +49,10 @@ export class DatamodelSettingsComponent implements OnInit {
           });
       }
     });
+  }
+
+  public renameDataModel(): void {
+    this.rename.emit();
   }
 
 }

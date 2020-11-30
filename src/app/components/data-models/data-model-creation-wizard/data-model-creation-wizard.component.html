@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>New Data Model</h1>
+<h1 mat-dialog-title>{{ dialogTitle }}</h1>
 <div mat-dialog-content>
   <mat-form-field appearance="outline" style="width:100% !important; margin-bottom: 10px;">
     <mat-label>Name</mat-label>
@@ -15,5 +15,5 @@
 </div>
 <div mat-dialog-actions style="margin-bottom: 15px;">
   <button mat-raised-button color="warn" (click)="onCancelClick()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onCreateClick()" [disabled]="dataModelName.invalid">Create</button>
+  <button mat-raised-button color="primary" (click)="onCreateClick()" [disabled]="dataModelName.invalid">{{ createActionBtnTxt }}</button>
 </div>
