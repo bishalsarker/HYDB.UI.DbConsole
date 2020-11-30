@@ -28,7 +28,7 @@
         <div class="col-12">
             <h5 class="header">{{ selectedDataModel.name }}</h5>
         </div>
-        <div class="col-12" style="margin-top: 15px;">
+        <div class="col-12" style="margin-top: 15px;" *ngIf="!hasNoDataModels">
             <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedTab">
                 <mat-tab label="Properties">
                     <hydb-property-list [dataModel]="selectedDataModel"></hydb-property-list>
@@ -53,5 +53,5 @@
 </div>
 
 <div class="row" style="margin-top: 60px;" *ngIf="!isLoaded">
-    <mat-spinner style="margin: 0 auto;" [diameter]="30" *ngIf="!showButton"></mat-spinner>
+    <mat-spinner style="margin: 0 auto;" [diameter]="30"></mat-spinner>
 </div>

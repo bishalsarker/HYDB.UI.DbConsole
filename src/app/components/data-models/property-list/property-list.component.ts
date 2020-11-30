@@ -14,6 +14,7 @@ import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmat
   styleUrls: ['./property-list.component.scss']
 })
 export class PropertyListComponent implements OnInit {
+  public isLoaded: boolean = true;
   @Input() dataModel: IDataModel;
 
   constructor(private httpClient: HttpClient, 
@@ -75,6 +76,7 @@ export class PropertyListComponent implements OnInit {
   }
 
   public createOrUpdateProperty(create: boolean, newProperty: IDataModelProperty): void {
+    this.isLoaded = false;
     this.httpClient
       .post<IDataModelProperty>(this.getAddOrUpdateApiUrl(create), newProperty, {
         headers: new HttpHeaders(this.httpHeaderService.getHeaders(false))
@@ -85,6 +87,10 @@ export class PropertyListComponent implements OnInit {
           const savedProperty: IDataModelProperty = _.cloneDeep(response.data);        
           this.addOrUpdatePropertyList(create, savedProperty);
         }
+      }, err => {
+        this.snackBar.open('Something went wrong', 'Dismiss', { duration: 3000 });
+      }, () => {
+        this.isLoaded = true;
       });
   }
 
@@ -112,6 +118,7 @@ export class PropertyListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.isLoaded = false;
         this.httpClient
           .get<any>(ApiEndpoints.DATA_MODEL_PROPERTIES_REMOVE, {
             params: { propId: property.id },
@@ -122,6 +129,10 @@ export class PropertyListComponent implements OnInit {
             this.dataModel.properties = _.remove(this.dataModel.properties, (o) => {
               return o.id !== property.id;
             })
+          }, err => {
+            this.snackBar.open('Something went wrong', 'Dismiss', { duration: 3000 });
+          }, () => {
+            this.isLoaded = true;
           });
       }
     });

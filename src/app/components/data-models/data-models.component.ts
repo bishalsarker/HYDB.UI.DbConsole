@@ -70,6 +70,7 @@ export class DataModelsComponent implements OnInit {
   }
 
   private saveOrUpdateDataModel(create: boolean, newDataModel: IDataModel): void {
+    this.isLoaded = false;
     this.httpClient
       .post<IDataModel>(this.getAddOrUpdateApiUrl(create), newDataModel, {
         headers: new HttpHeaders(this.httpHeaderService.getHeaders(false))
@@ -81,6 +82,10 @@ export class DataModelsComponent implements OnInit {
           this. addOrUpdateDataModel(create, savedDataModel);
           this.selectedDataModelId = savedDataModel.id;
         }
+      }, err => {
+        this.snackBar.open('Something went wrong', 'Dismiss', { duration: 3000 });
+      }, () => {
+        this.isLoaded = true;
       });
   }
 

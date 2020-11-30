@@ -30,5 +30,11 @@
 </div>
 <div mat-dialog-actions style="margin-bottom: 15px;">
   <button mat-raised-button color="warn" (click)="dialogRef.close()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onCreateClick()" cdkFocusInitial>{{ createActionBtnTxt }}</button>
+  <button 
+      mat-raised-button 
+      color="primary" 
+      (click)="onCreateClick()"
+      [disabled]="propertyName.invalid || propertyType.invalid">
+    {{ createActionBtnTxt }}
+  </button>
 </div>

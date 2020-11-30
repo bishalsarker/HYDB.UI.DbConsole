@@ -1,31 +1,40 @@
-<button class="btn btn-success" style="margin-top: 15px;" (click)="openPropertyWizard(true)">
-    <i class="fas fa-plus fa-fw"></i>&nbsp;Add property
-</button>
-<div *ngIf="!hasProperties" style="text-align: center; margin-top: 50px;">
-  <p>No properties added yet</p>
-</div>
-<div class="table-responsive" *ngIf="hasProperties">
-    <table class="table table-bordered" style="margin-top: 20px;">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Type</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let property of dataModel.properties">
-            <td>{{ property.name }}</td>
-            <td>{{ property.type }}</td>
-            <td class="button-row">
-                <button mat-raised-button color="primary" (click)="openPropertyWizard(false, property)">
-                  <i class="fas fa-edit fa-fw" aria-hidden="true"></i>&nbsp;Edit
-                </button>
-                <button mat-raised-button color="warn" (click)="deleteProperty(property)">
-                  <i class="fas fa-trash fa-fw" aria-hidden="true"></i>&nbsp;Delete
-                </button>
-            </td>
-          </tr>
-        </tbody>
-    </table>
+<div style="margin-top: 15px;">
+  <div *ngIf="!isLoaded">
+    <div style="width: 100%; overflow: hidden; margin-top: 50px;">
+      <mat-spinner style="margin: 0 auto; overflow: hidden;" [diameter]="30"></mat-spinner>
+    </div>
+  </div>
+  <div *ngIf="isLoaded">
+    <button class="btn btn-success" (click)="openPropertyWizard(true)">
+        <i class="fas fa-plus fa-fw"></i>&nbsp;Add property
+    </button>
+    <div *ngIf="!hasProperties" style="text-align: center; margin-top: 50px;">
+      <p>No properties added yet</p>
+    </div>
+    <div class="table-responsive" *ngIf="hasProperties">
+      <table class="table table-bordered" style="margin-top: 20px;">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let property of dataModel.properties">
+              <td>{{ property.name }}</td>
+              <td>{{ property.type }}</td>
+              <td class="button-row">
+                  <button mat-raised-button color="primary" (click)="openPropertyWizard(false, property)">
+                    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>&nbsp;Edit
+                  </button>
+                  <button mat-raised-button color="warn" (click)="deleteProperty(property)">
+                    <i class="fas fa-trash fa-fw" aria-hidden="true"></i>&nbsp;Delete
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
+  </div>
 </div>

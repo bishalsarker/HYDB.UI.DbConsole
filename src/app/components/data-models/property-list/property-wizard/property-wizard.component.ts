@@ -25,7 +25,6 @@ export class PropertyWizardComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.data);
     if(!this.data.isNew) {
       this.dialogTitle = 'Update Property';
       this.createActionBtnTxt = 'Update';
