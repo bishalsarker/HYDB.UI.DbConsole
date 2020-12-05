@@ -37,6 +37,10 @@ import { PropertyListComponent } from './components/data-models/property-list/pr
 import { PropertyWizardComponent } from './components/data-models/property-list/property-wizard/property-wizard.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { DatamodelSettingsComponent } from './components/data-models/datamodel-settings/datamodel-settings.component';
+import { DbserviceWizardComponent } from './components/db-services/dbservice-wizard/dbservice-wizard.component';
+import { OperationListComponent } from './components/db-services/operation-list/operation-list.component';
+import { ServiceSettingsComponent } from './components/db-services/service-settings/service-settings.component';
+import { OperationWizardComponent } from './components/db-services/operation-list/operation-wizard/operation-wizard.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import { DatamodelSettingsComponent } from './components/data-models/datamodel-s
     PropertyListComponent,
     PropertyWizardComponent,
     ConfirmationDialogComponent,
-    DatamodelSettingsComponent
+    DatamodelSettingsComponent,
+    DbserviceWizardComponent,
+    OperationListComponent,
+    ServiceSettingsComponent,
+    OperationWizardComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +93,9 @@ import { DatamodelSettingsComponent } from './components/data-models/datamodel-s
   entryComponents: [
     DataModelCreationWizardComponent,
     PropertyWizardComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    DbserviceWizardComponent,
+    OperationWizardComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

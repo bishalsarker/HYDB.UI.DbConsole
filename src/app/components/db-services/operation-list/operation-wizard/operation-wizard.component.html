@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>{{ dialogTitle }}</h1>
+<div mat-dialog-content style="padding-bottom: 20px;">
+
+  <mat-form-field appearance="outline" style="width:100% !important; margin-bottom: 10px;">
+    <mat-label>Name</mat-label>
+    <input matInput [formControl]="operationName" placeholder="e.g. phone_number">
+  </mat-form-field>
+  <div *ngIf="operationName.invalid && (operationName.dirty || operationName.touched)" style="color: red; margin-bottom: 15px;">
+    <div *ngIf="operationName.errors.required">
+      Name is required.
+    </div>
+    <div *ngIf="operationName.errors.pattern">
+      Only alphanumeric characters
+    </div>
+  </div>
+
+  <mat-form-field appearance="outline" style="width:100% !important; margin-bottom: 10px;">
+    <mat-label>Operation Type</mat-label>
+    <mat-select [formControl]="operationType">
+        <mat-option value="query">Query</mat-option>
+        <mat-option value="mutation">Mutation</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngIf="operationType.invalid && (operationType.dirty || operationType.touched)" style="color: red; margin-bottom: 15px;">
+    <div *ngIf="operationType.errors.required">
+      Type is required.
+    </div>
+  </div>
+
+</div>
+<div mat-dialog-actions style="margin-bottom: 15px;">
+  <button mat-raised-button color="warn" (click)="dialogRef.close()">Cancel</button>
+  <button 
+      mat-raised-button 
+      color="primary" 
+      (click)="onCreateClick()"
+      [disabled]="operationName.invalid || operationType.invalid">
+    {{ createActionBtnTxt }}
+  </button>
+</div>

@@ -1,0 +1,40 @@
+<div style="margin-top: 15px;">
+    <div *ngIf="!isLoaded">
+      <div style="width: 100%; overflow: hidden; margin-top: 50px;">
+        <mat-spinner style="margin: 0 auto; overflow: hidden;" [diameter]="30"></mat-spinner>
+      </div>
+    </div>
+    <div *ngIf="isLoaded">
+      <button class="btn btn-success" (click)="openOperationWizard(true)">
+          <i class="fas fa-plus fa-fw"></i>&nbsp;Add operation
+      </button>
+      <div *ngIf="!hasOperations" style="text-align: center; margin-top: 50px;">
+        <p>No operations added yet</p>
+      </div>
+      <div class="table-responsive" *ngIf="hasOperations">
+        <table class="table table-bordered" style="margin-top: 20px;">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let operation of service.operations">
+                <td>{{ operation.name }}</td>
+                <td>{{ operation.type }}</td>
+                <td class="button-row">
+                    <button mat-raised-button color="primary" (click)="openOperationWizard(false, operation)">
+                      <i class="fas fa-edit fa-fw" aria-hidden="true"></i>&nbsp;Edit
+                    </button>
+                    <button mat-raised-button color="warn" (click)="deleteOperation(operation)">
+                      <i class="fas fa-trash fa-fw" aria-hidden="true"></i>&nbsp;Delete
+                    </button>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+  </div>
