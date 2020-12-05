@@ -7,6 +7,7 @@ import { HttpheadersService } from 'src/app/services/httpheaders.service';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 import { OperationWizardComponent } from './operation-wizard/operation-wizard.component';
 import * as _ from 'lodash';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'hydb-operation-list',
@@ -21,6 +22,7 @@ export class OperationListComponent implements OnInit {
   constructor(private httpClient: HttpClient, 
               private dialog: MatDialog, 
               private snackBar: MatSnackBar,
+              private router: Router,
               private httpHeaderService: HttpheadersService) { }
 
   ngOnInit() {
@@ -59,11 +61,21 @@ export class OperationListComponent implements OnInit {
     });
   }
 
+  public openScriptEditor({ id }: IOperation): void {
+    this.router.navigate(['/tools/scripteditor'], {
+      queryParams: {
+        op_id: id,
+        ref: this.service.id
+      }
+    });
+  }
+
   private getOperationModel(create: boolean, operation: IOperation) {
     const model: IOperation = {
       id: '',
       name: '',
       type: '',
+      script: '',
       serviceId: this.service.id
     };
 

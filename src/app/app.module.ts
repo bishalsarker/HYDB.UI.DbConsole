@@ -41,6 +41,8 @@ import { DbserviceWizardComponent } from './components/db-services/dbservice-wiz
 import { OperationListComponent } from './components/db-services/operation-list/operation-list.component';
 import { ServiceSettingsComponent } from './components/db-services/service-settings/service-settings.component';
 import { OperationWizardComponent } from './components/db-services/operation-list/operation-wizard/operation-wizard.component';
+import { ScriptEditorComponent } from './components/db-services/operation-list/script-editor/script-editor.component';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import { OperationWizardComponent } from './components/db-services/operation-lis
     DbserviceWizardComponent,
     OperationListComponent,
     ServiceSettingsComponent,
-    OperationWizardComponent
+    OperationWizardComponent,
+    ScriptEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ import { OperationWizardComponent } from './components/db-services/operation-lis
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MonacoEditorModule.forRoot(),
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,

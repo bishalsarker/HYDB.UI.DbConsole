@@ -8,5 +8,6 @@ export interface IOperation {
     id: string;
     name: string;
     type: string;
+    script: string;
     serviceId: string;
 }

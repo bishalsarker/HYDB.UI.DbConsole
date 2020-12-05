@@ -22,7 +22,9 @@
             </thead>
             <tbody>
               <tr *ngFor="let operation of service.operations">
-                <td>{{ operation.name }}</td>
+                <td>
+                  <a style="cursor: pointer; color: #007bff;" (click)="openScriptEditor(operation)">{{ operation.name }}</a>
+                </td>
                 <td>{{ operation.type }}</td>
                 <td class="button-row">
                     <button mat-raised-button color="primary" (click)="openOperationWizard(false, operation)">

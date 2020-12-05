@@ -6,6 +6,7 @@ import { HttpheadersService } from 'src/app/services/httpheaders.service';
 import * as _ from 'lodash';
 import { IService } from 'src/app/interfaces/IService';
 import { DbserviceWizardComponent } from './dbservice-wizard/dbservice-wizard.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'hydb-db-services',
@@ -21,11 +22,20 @@ export class DbServicesComponent implements OnInit {
 
   constructor(private httpClient: HttpClient,
               private httpHeaderService: HttpheadersService,
+              private route: ActivatedRoute,
               private dialog: MatDialog,
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.loadAllServices();
+    this.route.queryParams.subscribe(params => {
+      const showParam = params['show'];
+
+      if (showParam) {
+        this.loadAllServices(false, showParam);
+      } else {
+        this.loadAllServices(true);
+      }
+    })
   }
 
   public openServiceWizard(create: boolean, service?: IService): void {
@@ -103,7 +113,7 @@ export class DbServicesComponent implements OnInit {
     }
   }
 
-  public loadAllServices(): void {
+  public loadAllServices(setDefault: boolean, serviceId?: string): void {
     this.isLoaded = false;
     this.httpClient
       .get<IService[]>(ApiEndpoints.SERVICES_GET_ALL_OR_SINGLE, {
@@ -113,7 +123,13 @@ export class DbServicesComponent implements OnInit {
         this.services = _.cloneDeep(response);
         if (this.services.length > 0) {
           this.selectedTab = 0;
-          this.selectedServiceId = this.services[0].id;
+          if (setDefault) {
+            this.selectedServiceId = this.services[0].id;
+          }
+
+          if(!setDefault && serviceId) {
+            this.selectedServiceId = serviceId;
+          }
         }
       }, err => {
         this.snackBar.open(`Something went wrong`, '', { duration: 5000 });
