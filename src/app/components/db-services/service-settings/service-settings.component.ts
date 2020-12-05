@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Output } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 import { ApiEndpoints } from 'src/app/constants/api-endpoints';
 import { IService } from 'src/app/interfaces/IService';
 import { HttpheadersService } from 'src/app/services/httpheaders.service';
@@ -21,6 +22,7 @@ export class ServiceSettingsComponent implements OnInit {
   constructor(
     private httpClient: HttpClient, 
     private dialog: MatDialog,
+    private router: Router,
     private snackBar: MatSnackBar,
     private httpHeaderService: HttpheadersService) { }
 
@@ -45,7 +47,7 @@ export class ServiceSettingsComponent implements OnInit {
           .subscribe((response: any) => {
             this.snackBar.open(response.message, 'Dismiss', { duration: 3000 });
             if(response.isSuccess) {
-              this.refresh.emit();
+              this.router.navigateByUrl('/services');
             }
           });
       }

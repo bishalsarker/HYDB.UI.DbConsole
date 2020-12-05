@@ -11,8 +11,9 @@
       <div *ngIf="!hasOperations" style="text-align: center; margin-top: 50px;">
         <p>No operations added yet</p>
       </div>
-      <div class="table-responsive" *ngIf="hasOperations">
-        <table class="table table-bordered" style="margin-top: 20px;">
+      <div class="table-responsive" *ngIf="hasOperations" style="margin-top: 20px;">
+        <p><i>Click on a operation to open it in the script editor</i></p>
+        <table class="table table-bordered">
             <thead>
               <tr>
                 <th scope="col">Name</th>
