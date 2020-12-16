@@ -38,16 +38,17 @@ export class LoginComponent implements OnInit {
     this.httpClient.post<any>(`${ApiEndpoints.TOKEN_GET}`, loginInfo)
     .subscribe((response) => {
       localStorage.setItem('auth_token', response.token);
-      if(this.route.snapshot.queryParams.return_to) {
-        this.router.navigateByUrl(this.route.snapshot.queryParams.return_to);
-      } else {
-        this.router.navigateByUrl('/apps');
-      }
+      // if(this.route.snapshot.queryParams.return_to) {
+      //   this.router.navigateByUrl(this.route.snapshot.queryParams.return_to);
+      // } else {
+      //   this.router.navigateByUrl('/services');
+      // }
+      window.location.reload();
     }, err => {
       this.hasError = true;
       this.errorMessage = err.error;
       this.showButton = true;
-    })
+    });
   }
 
   public get userName(): AbstractControl {

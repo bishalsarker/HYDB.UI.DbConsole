@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class HttpheadersService {
   private headers: any = {
-    "Authorization": `Bearer ${localStorage.getItem('auth_token')}`
+    "Authorization": `Bearer ${localStorage.getItem('auth_token') ? localStorage.getItem('auth_token') : null}`
   }
 
   constructor() {}

@@ -18,6 +18,9 @@ export class ScriptEditorComponent implements OnInit, AfterViewInit {
   public operation: IOperation;
   public service: IService;
 
+  public scriptHasError: boolean = false;
+  public scriptErrors: string = "";
+
   constructor(private httpClient: HttpClient,
               private httpHeaderService: HttpheadersService,
               private route: ActivatedRoute,
@@ -67,6 +70,20 @@ export class ScriptEditorComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/services'], {
       queryParams: {
         show: this.service.id
+      }
+    });
+  }
+
+  public saveScript(): void {
+    this.scriptHasError = false;
+    this.httpClient.post<void>(ApiEndpoints.SERVICES_OPERATIONS_UPDATE_SCRIPTS, this.operation, {
+      headers: this.httpHeaderService.getHeaders(false)
+    }).subscribe((response: any) => {
+      if (!response.isSuccess) {
+        this.scriptHasError = true;
+        this.scriptErrors = response.message;
+      } else {
+        this.snackBar.open(response.message, 'Dismiss', { duration: 3000 });
       }
     });
   }

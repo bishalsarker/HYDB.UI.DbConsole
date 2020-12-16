@@ -18,6 +18,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    data: { isLoginPage: true },
     canActivate: [ LoginpageGuard ]
   },
   {

@@ -1,57 +1,59 @@
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <h4 class="header">
-            <i class="fas fa-plug fa-fw" aria-hidden="true"></i>&nbsp;Services
-        </h4>
-    </div>
-    <diV class="col-md-6 col-sm-12" *ngIf="isLoaded">
-        <div class="input-group">
-            <select class="custom-select" [(ngModel)]="selectedServiceId" (change)="onSelectionChange()">
-                <option value="" *ngIf="hasNoServices">Choose...</option>
-                <option 
-                    *ngFor="let service of services" 
-                    [value]="service.id">
-                  {{ service.name }}
-                </option> 
-            </select>
-            <div class="input-group-append">
-                <button class="btn btn-success" (click)="openServiceWizard(true)">
-                    <i class="fas fa-plus fa-fw"></i>&nbsp;Add new service
-                </button>
+<ng-container *ngIf="isLoaded">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h4 class="header">
+                <i class="fas fa-plug fa-fw" aria-hidden="true"></i>&nbsp;Services
+            </h4>
+        </div>
+        <diV class="col-md-6 col-sm-12" *ngIf="isLoaded">
+            <div class="input-group">
+                <select class="custom-select" [(ngModel)]="selectedServiceId" (change)="onSelectionChange()">
+                    <option value="" *ngIf="hasNoServices">Choose...</option>
+                    <option 
+                        *ngFor="let service of services" 
+                        [value]="service.id">
+                      {{ service.name }}
+                    </option> 
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-success" (click)="openServiceWizard(true)">
+                        <i class="fas fa-plus fa-fw"></i>&nbsp;Add new service
+                    </button>
+                </div>
             </div>
-        </div>
-    </diV>
-</div>
-
-<div *ngIf="isLoaded">
-    <div class="row" *ngIf="selectedService" style="margin-top: 30px;">
-        <div class="col-12">
-            <h5 class="header">{{ selectedService.name }}</h5>
-        </div>
-        <div class="col-12" style="margin-top: 15px;" *ngIf="!hasNoServices">
-            <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedTab">
-                <mat-tab label="Operations">
-                    <hydb-operation-list [service]="selectedService"></hydb-operation-list>
-                </mat-tab>
-                <mat-tab label="Settings">
-                    <hydb-service-settings 
-                        [service]="selectedService" 
-                        (refresh)="loadAllServices()"
-                        (rename)="openServiceWizard(false, selectedService)">
-                    </hydb-service-settings>
-                </mat-tab>
-            </mat-tab-group>  
-        </div>
+        </diV>
     </div>
     
-    <div class="row" style="margin-top: 30px;">
-        <div class="col-12" *ngIf="hasNoServices" style="text-align: center; margin-top: 30px;">
-            <p>Seems like you don't have any services created currently</p>
-            <p>Start creating services by clicking on the "Add new service" button</p>
+    <div>
+        <div class="row" *ngIf="selectedService" style="margin-top: 30px;">
+            <div class="col-12">
+                <h5 class="header">{{ selectedService.name }}</h5>
+            </div>
+            <div class="col-12" style="margin-top: 15px;" *ngIf="!hasNoServices">
+                <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selectedTab">
+                    <mat-tab label="Operations">
+                        <hydb-operation-list [service]="selectedService"></hydb-operation-list>
+                    </mat-tab>
+                    <mat-tab label="Settings">
+                        <hydb-service-settings 
+                            [service]="selectedService" 
+                            (refresh)="loadAllServices()"
+                            (rename)="openServiceWizard(false, selectedService)">
+                        </hydb-service-settings>
+                    </mat-tab>
+                </mat-tab-group>  
+            </div>
+        </div>
+        
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-12" *ngIf="hasNoServices" style="text-align: center; margin-top: 30px;">
+                <p>Seems like you don't have any services created currently</p>
+                <p>Start creating services by clicking on the "Add new service" button</p>
+            </div>
         </div>
     </div>
-</div>
+</ng-container>
 
-<div class="row" style="margin-top: 60px;" *ngIf="!isLoaded">
+<div class="row" style="margin-top: 100px;" *ngIf="!isLoaded">
     <mat-spinner style="margin: 0 auto;" [diameter]="30"></mat-spinner>
 </div>

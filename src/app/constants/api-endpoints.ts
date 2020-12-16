@@ -32,5 +32,6 @@ export class ApiEndpoints {
     public static readonly SERVICES_OPERATIONS_UPDATE: string = `${ApiEndpoints.SERVICES_OPERATIONS}/update`;
     public static readonly SERVICES_OPERATIONS_REMOVE: string = `${ApiEndpoints.SERVICES_OPERATIONS}/delete`;
     public static readonly SERVICES_OPERATIONS_GET_ALL_OR_SINGLE: string = `${ApiEndpoints.SERVICES_OPERATIONS}/get`;
+    public static readonly SERVICES_OPERATIONS_UPDATE_SCRIPTS: string = `${ApiEndpoints.SERVICES_OPERATIONS}/updatescript`;
     
 }

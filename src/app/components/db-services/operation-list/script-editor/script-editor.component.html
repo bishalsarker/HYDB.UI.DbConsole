@@ -1,35 +1,47 @@
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <h4 class="header">
-            <i class="fas fa-file-code fa-fw" aria-hidden="true"></i>&nbsp;Script Editor
-        </h4>
-    </div>
-    <diV class="col-md-6 col-sm-12" *ngIf="isLoaded">
-        <button class="btn btn-success" (click)="backToList()" style="float: right;">
-            <i class="fas fa-list fa-fw"></i>&nbsp;Back to list
-        </button>
-    </diV>
-</div>
-
-<div *ngIf="isLoaded">
-    <div class="row" *ngIf="operation && service" style="margin-top: 30px;">
-        <div class="col-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item">
-                    <a style="cursor: pointer; color: #007bff;" (click)="backToList()">{{ service.name }}</a>
-                  </li>
-                  <li class="breadcrumb-item">{{ operation.name }}</li>
-                </ol>
-            </nav>
+<ng-container *ngIf="isLoaded">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h4 class="header">
+                <i class="fas fa-file-code fa-fw" aria-hidden="true"></i>&nbsp;Script Editor
+            </h4>
         </div>
-        <div class="col-12" style="margin-top: 15px;" *ngIf="!hasNoServices">
-            <div class="border" style="padding-top: 20px;" *ngIf="editorOptions">
-                <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="operation.script"></ngx-monaco-editor>
+        <diV class="col-md-6 col-sm-12" *ngIf="isLoaded">
+            <button class="btn btn-success" (click)="backToList()" style="float: right;">
+                <i class="fas fa-list fa-fw"></i>&nbsp;Back to list
+            </button>
+        </diV>
+    </div>
+    
+    <div>
+        <div class="row" *ngIf="operation && service" style="margin-top: 30px;">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a style="cursor: pointer; color: #007bff;" (click)="backToList()">{{ service.name }}</a>
+                      </li>
+                      <li class="breadcrumb-item">{{ operation.name }}</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-12" style="margin-top: 15px;" *ngIf="scriptHasError">
+                <div class="alert alert-danger" role="alert">
+                    {{ scriptErrors }}
+                </div>
+            </div>
+            <div class="col-12" *ngIf="!hasNoServices">
+                <div class="border" style="padding-top: 20px;" *ngIf="editorOptions">
+                    <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="operation.script"></ngx-monaco-editor>
+                </div>
+            </div>
+            <div class="col-12" style="margin-top: 15px;" *ngIf="!hasNoServices">
+                <button class="btn btn-primary" (click)="saveScript()">
+                    <i class="fas fa-save fa-fw"></i>&nbsp;Save
+                </button>
             </div>
         </div>
     </div>
-</div>
+</ng-container>
 
 <div class="row" style="margin-top: 60px;" *ngIf="!isLoaded">
     <mat-spinner style="margin: 0 auto;" [diameter]="30"></mat-spinner>

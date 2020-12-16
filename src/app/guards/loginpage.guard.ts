@@ -19,10 +19,10 @@ canActivate(
   next: ActivatedRouteSnapshot,
   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.httpClient.get<any>(`${ApiEndpoints.TOKEN_VERIFY}`, {
-      headers: new HttpHeaders(this.httpHeaderService.getHeaders(false))
+      headers: new HttpHeaders().set("Authorization", `Bearer ${localStorage.getItem('auth_token')}`)
     }).pipe(map(x => {
       if(x.isValid) {
-        this.router.navigate(['/apps']);
+        this.router.navigate(['/services']);
         return false;
       }
       else {

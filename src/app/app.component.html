@@ -1,4 +1,10 @@
-<hydb-navbar></hydb-navbar>
-<div class="container" style="margin-top: 90px;">
+<ng-container *ngIf="showLayout">
+    <hydb-navbar></hydb-navbar>
+    <div class="container" style="margin-top: 90px;">
+        <router-outlet></router-outlet>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="!showLayout">
     <router-outlet></router-outlet>
-</div>
+</ng-container>
