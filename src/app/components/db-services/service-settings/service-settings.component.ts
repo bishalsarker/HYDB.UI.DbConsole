@@ -16,7 +16,6 @@ import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmat
 export class ServiceSettingsComponent implements OnInit {
 
   @Input() service: IService;
-  @Output() refresh: EventEmitter<void> = new EventEmitter<void>();
   @Output() rename: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(

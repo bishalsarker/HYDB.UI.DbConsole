@@ -37,7 +37,6 @@
                     <mat-tab label="Settings">
                         <hydb-service-settings 
                             [service]="selectedService" 
-                            (refresh)="loadAllServices()"
                             (rename)="openServiceWizard(false, selectedService)">
                         </hydb-service-settings>
                     </mat-tab>

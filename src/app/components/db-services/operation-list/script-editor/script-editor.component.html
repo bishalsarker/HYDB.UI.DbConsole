@@ -29,12 +29,12 @@
                     {{ scriptErrors }}
                 </div>
             </div>
-            <div class="col-12" *ngIf="!hasNoServices">
+            <div class="col-12">
                 <div class="border" style="padding-top: 20px;" *ngIf="editorOptions">
                     <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="operation.script"></ngx-monaco-editor>
                 </div>
             </div>
-            <div class="col-12" style="margin-top: 15px;" *ngIf="!hasNoServices">
+            <div class="col-12" style="margin-top: 15px;">
                 <button class="btn btn-primary" (click)="saveScript()">
                     <i class="fas fa-save fa-fw"></i>&nbsp;Save
                 </button>
