@@ -1,0 +1,35 @@
+<div style="margin-top: 15px;">
+    <div>
+      <button class="btn btn-success" (click)="openClientWizard(true)">
+          <i class="fas fa-plus fa-fw"></i>&nbsp;Add Client
+      </button>
+      <div *ngIf="!hasClients" style="text-align: center; margin-top: 50px;">
+        <p>No clients added yet</p>
+      </div>
+      <div class="table-responsive" *ngIf="hasClients">
+        <table class="table table-bordered" style="margin-top: 20px;">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">API Key</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let client of clients">
+                <td>{{ client.name }}</td>
+                <td>{{ client.apiKey }}</td>
+                <td class="button-row">
+                    <button mat-raised-button color="primary" (click)="openClientWizard(false, Client)">
+                      <i class="fas fa-edit fa-fw" aria-hidden="true"></i>&nbsp;Edit
+                    </button>
+                    <button mat-raised-button color="warn" (click)="deleteClient(Client)">
+                      <i class="fas fa-trash fa-fw" aria-hidden="true"></i>&nbsp;Delete
+                    </button>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+  </div>

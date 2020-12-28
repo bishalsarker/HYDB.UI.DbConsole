@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{ dialogTitle }}</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline" style="width:100% !important; margin-bottom: 10px;">
+    <mat-label>Name</mat-label>
+    <input matInput [formControl]="clientName">
+  </mat-form-field>
+  <div *ngIf="clientName.invalid && (clientName.dirty || clientName.touched)" style="color: red; margin-bottom: 15px;">
+    <div *ngIf="clientName.errors.required">
+      Name is required.
+    </div>
+    <div *ngIf="clientName.errors.pattern">
+      Only alphanumeric characters
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions style="margin-bottom: 15px;">
+  <button mat-raised-button color="warn" (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onCreateClick()" [disabled]="clientName.invalid">{{ createActionBtnTxt }}</button>
+</div>

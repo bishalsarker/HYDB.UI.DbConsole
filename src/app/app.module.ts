@@ -43,6 +43,9 @@ import { ServiceSettingsComponent } from './components/db-services/service-setti
 import { OperationWizardComponent } from './components/db-services/operation-list/operation-wizard/operation-wizard.component';
 import { ScriptEditorComponent } from './components/db-services/operation-list/script-editor/script-editor.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { ClientsComponent } from './components/clients/clients.component';
+import { ClientWizardComponent } from './components/clients/client-wizard/client-wizard.component';
+import { ClientListComponent } from './components/clients/client-list/client-list.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,10 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
     OperationListComponent,
     ServiceSettingsComponent,
     OperationWizardComponent,
-    ScriptEditorComponent
+    ScriptEditorComponent,
+    ClientsComponent,
+    ClientWizardComponent,
+    ClientListComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +105,8 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
     PropertyWizardComponent,
     ConfirmationDialogComponent,
     DbserviceWizardComponent,
-    OperationWizardComponent
+    OperationWizardComponent,
+    ClientWizardComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

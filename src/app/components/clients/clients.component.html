@@ -1,0 +1,19 @@
+<ng-container *ngIf="isLoaded">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h4 class="header">
+                <i class="fas fa-network-wired fa-fw" aria-hidden="true"></i>&nbsp;Clients
+            </h4>
+        </div>
+    </div>
+    
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-12" style="margin-top: 15px;">
+            <hydb-client-list [clients]="allClients"></hydb-client-list>
+        </div>
+    </div>
+</ng-container>
+
+<div class="row" style="margin-top: 60px;" *ngIf="!isLoaded">
+    <mat-spinner style="margin: 0 auto;" [diameter]="30"></mat-spinner>
+</div>

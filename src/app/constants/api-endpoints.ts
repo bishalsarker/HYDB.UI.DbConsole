@@ -33,5 +33,11 @@ export class ApiEndpoints {
     public static readonly SERVICES_OPERATIONS_REMOVE: string = `${ApiEndpoints.SERVICES_OPERATIONS}/delete`;
     public static readonly SERVICES_OPERATIONS_GET_ALL_OR_SINGLE: string = `${ApiEndpoints.SERVICES_OPERATIONS}/get`;
     public static readonly SERVICES_OPERATIONS_UPDATE_SCRIPTS: string = `${ApiEndpoints.SERVICES_OPERATIONS}/updatescript`;
+
+    //Clients
+    public static readonly CLIENT_ROOT: string = `${ApiEndpoints.ROOT}/clients`;
+    public static readonly CLIENT_GET_ALL_OR_SINGLE: string = `${ApiEndpoints.CLIENT_ROOT}/get`;
+    public static readonly CLIENT_ADD_NEW: string = `${ApiEndpoints.CLIENT_ROOT}/add`;
+    public static readonly CLIENT_UPDATE: string = `${ApiEndpoints.CLIENT_ROOT}/update`;
     
 }
