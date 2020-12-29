@@ -5,12 +5,17 @@
     <mat-label>Name</mat-label>
     <input matInput [formControl]="propertyName" placeholder="e.g. phone_number">
   </mat-form-field>
-  <div *ngIf="propertyName.invalid && (propertyName.dirty || propertyName.touched)" style="color: red; margin-bottom: 15px;">
-    <div *ngIf="propertyName.errors.required">
-      Name is required.
+  <div style="color: red; margin-bottom: 15px;">
+    <div *ngIf="propertyName.invalid && (propertyName.dirty || propertyName.touched)">
+      <div *ngIf="propertyName.errors.required">
+        Name is required.
+      </div>
+      <div *ngIf="propertyName.errors.pattern">
+        Only alphanumeric characters
+      </div>
     </div>
-    <div *ngIf="propertyName.errors.pattern">
-      Only alphanumeric characters
+    <div *ngIf="hasBlockedKeywordError">
+      {{ data.propertyModel.name }} is restricted
     </div>
   </div>
 
