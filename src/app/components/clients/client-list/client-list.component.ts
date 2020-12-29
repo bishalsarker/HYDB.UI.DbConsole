@@ -5,7 +5,8 @@ import { ApiEndpoints } from 'src/app/constants/api-endpoints';
 import { IClient } from 'src/app/interfaces/IClient';
 import { HttpheadersService } from 'src/app/services/httpheaders.service';
 import { ClientWizardComponent } from '../client-wizard/client-wizard.component';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, remove } from 'lodash';
+import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'hydb-client-list',
@@ -97,6 +98,33 @@ export class ClientListComponent implements OnInit {
 
   public get hasClients(): boolean {
     return this.clients.length != 0;
+  }
+
+  public deleteClient({ id }: IClient): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '500px',
+      data: { 
+        message: 'Are you sure you want to delete this client?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.httpClient
+          .delete<any>(ApiEndpoints.CLIENT_DELETE, {
+            params: { clientId: id },
+            headers: new HttpHeaders(this.httpHeaderService.getHeaders(false))
+          })
+          .subscribe((response: any) => {
+            this.snackBar.open(response.message, 'Dismiss', { duration: 3000 });
+            this.clients = remove(this.clients, (o) => {
+              return o.id !== id;
+            })
+          }, err => {
+            this.snackBar.open('Something went wrong', 'Dismiss', { duration: 3000 });
+          });
+      }
+    });
   }
 
 }

@@ -4,6 +4,8 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { DataModelsComponent } from './components/data-models/data-models.component';
 import { DbServicesComponent } from './components/db-services/db-services.component';
 import { ScriptEditorComponent } from './components/db-services/operation-list/script-editor/script-editor.component';
+import { CongratulationsComponent } from './components/join/congratulations/congratulations.component';
+import { JoinComponent } from './components/join/join.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyaccountComponent } from './components/myaccount/myaccount.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -20,6 +22,16 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     data: { isLoginPage: true },
+    canActivate: [ LoginpageGuard ]
+  },
+  {
+    path: 'join',
+    component: JoinComponent,
+    canActivate: [ LoginpageGuard ]
+  },
+  {
+    path: 'congratulations',
+    component: CongratulationsComponent,
     canActivate: [ LoginpageGuard ]
   },
   {

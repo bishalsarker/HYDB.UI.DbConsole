@@ -20,10 +20,7 @@
                 <td>{{ client.name }}</td>
                 <td>{{ client.apiKey }}</td>
                 <td class="button-row">
-                    <button mat-raised-button color="primary" (click)="openClientWizard(false, Client)">
-                      <i class="fas fa-edit fa-fw" aria-hidden="true"></i>&nbsp;Edit
-                    </button>
-                    <button mat-raised-button color="warn" (click)="deleteClient(Client)">
+                    <button mat-raised-button color="warn" (click)="deleteClient(client)">
                       <i class="fas fa-trash fa-fw" aria-hidden="true"></i>&nbsp;Delete
                     </button>
                 </td>

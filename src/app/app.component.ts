@@ -10,6 +10,8 @@ export class AppComponent {
   constructor(private router: Router) {}
 
   public get showLayout(): boolean {
-    return !this.router.url.includes('/login');
+    return !(this.router.url.includes('/login') ||
+           this.router.url.includes('/join') ||
+           this.router.url.includes('/congratulations'));
   }
 }

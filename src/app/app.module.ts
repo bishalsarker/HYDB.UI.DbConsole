@@ -46,11 +46,15 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { ClientsComponent } from './components/clients/clients.component';
 import { ClientWizardComponent } from './components/clients/client-wizard/client-wizard.component';
 import { ClientListComponent } from './components/clients/client-list/client-list.component';
+import { JoinComponent } from './components/join/join.component';
+import { CongratulationsComponent } from './components/join/congratulations/congratulations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    JoinComponent,
+    CongratulationsComponent,
     MyaccountComponent,
     NavbarComponent,
     DbServicesComponent,

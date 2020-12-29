@@ -39,5 +39,6 @@ export class ApiEndpoints {
     public static readonly CLIENT_GET_ALL_OR_SINGLE: string = `${ApiEndpoints.CLIENT_ROOT}/get`;
     public static readonly CLIENT_ADD_NEW: string = `${ApiEndpoints.CLIENT_ROOT}/add`;
     public static readonly CLIENT_UPDATE: string = `${ApiEndpoints.CLIENT_ROOT}/update`;
+    public static readonly CLIENT_DELETE: string = `${ApiEndpoints.CLIENT_ROOT}/delete`;
     
 }
